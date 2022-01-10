@@ -1,11 +1,15 @@
 package com.skilldistillery.games.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.skilldistillery.games.entities.Game;
 
 public interface GameService {
 
-	List<Game> getAllGames();
-	Game getGameById(int gameId);
+	public List<Game> getAllGames();
+	public Optional<Game> findById(int gameId);
+	public Game createGame(Game game);
+	public Game updateGame(Game game);
+	public void deleteGame(Game game);
 }
