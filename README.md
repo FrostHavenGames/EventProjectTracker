@@ -14,7 +14,7 @@ This project is a Game database. It will keep track of video games/board games/c
 | Game       | DELETE        | /api/v1/games/{id} | | Delete |
 
 ## Technologies Used
-Java
-MySql
-Spring Boot
-Postman
+- Java
+- MySql
+- Spring Boot
+- Postman

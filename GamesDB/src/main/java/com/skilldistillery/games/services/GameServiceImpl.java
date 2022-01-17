@@ -24,6 +24,11 @@ public class GameServiceImpl implements GameService {
 	public Optional<Game> findById(int gameId) {
 		return gameRepo.findById(gameId);
 	}
+	
+	@Override
+	public List<Game> findByTitleLike(String keyword) {
+		return gameRepo.findByTitleLike(keyword);
+	}
 
 	@Override
 	public Game createGame(Game game) {
@@ -43,7 +48,7 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
-	public void deleteGame(Game game) {
-		gameRepo.delete(game);
+	public void deleteGame(Integer id) {
+		gameRepo.deleteById(id);
 	}
 }

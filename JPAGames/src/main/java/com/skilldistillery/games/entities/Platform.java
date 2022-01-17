@@ -9,15 +9,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-@Entity
-public class Game {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@Entity
+public class Platform {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
+	
 	private String title;
 	
 	private String description;
@@ -25,15 +29,11 @@ public class Game {
 	@Column(name="release_date")
 	private LocalDate releaseDate;
 	
-	@Column(name="box_art_url")
-	private String boxArtURL;
+	@ManyToMany
+	@JoinTable(name = "platform_has_game", joinColumns = @JoinColumn(name = "platform_id"), inverseJoinColumns = @JoinColumn(name = "game_id"))
+	@JsonIgnoreProperties("platforms")
+	private List<Game> games;
 
-	@ManyToMany(mappedBy = "games")
-	private List<Platform> platforms;
-	
-	@ManyToMany(mappedBy = "games")
-	private List<Genre> genres;
-	
 	public int getId() {
 		return id;
 	}
@@ -65,24 +65,16 @@ public class Game {
 	public void setReleaseDate(LocalDate releaseDate) {
 		this.releaseDate = releaseDate;
 	}
-
-	public String getBoxArtURL() {
-		return boxArtURL;
-	}
-
-	public void setBoxArtURL(String boxArtURL) {
-		this.boxArtURL = boxArtURL;
-	}
 	
-	public List<Platform> getPlatforms() {
-		return platforms;
+	public List<Game> getGames() {
+		return games;
 	}
 
-	public void setPlatforms(List<Platform> platforms) {
-		this.platforms = platforms;
+	public void setGames(List<Game> games) {
+		this.games = games;
 	}
 
-	public Game() {
+	public Platform() {
 		super();
 	}
 
@@ -99,7 +91,9 @@ public class Game {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Game other = (Game) obj;
+		Platform other = (Platform) obj;
 		return id == other.id;
 	}
+	
+	
 }

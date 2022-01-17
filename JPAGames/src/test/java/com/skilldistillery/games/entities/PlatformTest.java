@@ -17,12 +17,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class GameTest {
+class PlatformTest {
 	
 	private static EntityManagerFactory emf;
 	
 	private EntityManager em;
-	private Game game;
+	private Platform platform;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -37,35 +37,34 @@ class GameTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		game = em.find(Game.class, 1);
+		platform = em.find(Platform.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		game = null;
+		platform = null;
 	}
 
 	@Test
-	@DisplayName("Test Game Mapping")
+	@DisplayName("Test Platform Mapping")
 	void test() {
-		assertNotNull(game);
-		assertEquals("Chrono Trigger", game.getTitle());
+		assertNotNull(platform);
+		assertEquals("PlayStation", platform.getTitle());
 		
-		assertEquals("In this turn-based Japanese RPG, young Crono must travel through time "
-				+ "through a misfunctioning teleporter to rescue his misfortunate companion "
-				+ "and take part in an intricate web of past and present perils. The adventure that "
-				+ "ensues soon unveils an evil force set to destroy the world, triggering Crono's "
-				+ "race against time to change the course of history and bring about a brighter future.", 
-				game.getDescription()); 
+		assertEquals("The PlayStation (officially abbreviated as PS and commonly known as the PS1 or its codename PSX) "
+				+ "is a home video game console developed and marketed by Sony Computer Entertainment. "
+				+ "It was the first of the PlayStation lineup of video game consoles. As a fifth generation console, "
+				+ "the PlayStation primarily competed with the Nintendo 64 and the Sega Saturn. The PlayStation was "
+				+ "the first \"computer entertainment platform\" to ship over 100 million units, which it had reached "
+				+ "nine years after its initial launch.", 
+				platform.getDescription()); 
 		
-		LocalDate date = game.getReleaseDate();
+		LocalDate date = platform.getReleaseDate();
 		assertEquals(1995, date.getYear());
 		assertEquals(9, date.getMonth().getValue());
-		assertEquals(11, date.getDayOfMonth());
+		assertEquals(9, date.getDayOfMonth());
 		
-		assertEquals("https://images.igdb.com/igdb/image/upload/t_cover_big/co3plw.png", game.getBoxArtURL());
-		
-		assertTrue(game.getPlatforms().size() > 0);
+		assertTrue(platform.getGames().size() > 0);
 	}
 }
