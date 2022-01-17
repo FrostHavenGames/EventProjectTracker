@@ -31,9 +31,9 @@ function getGame(gameId) {
         displayGamePage(game);
       } else if (xhr.status === 404) {
         console.error("Error!");
-        displayError("Game" + gameId + " not found");
+        console.error("Game" + gameId + " not found");
       } else {
-        displayError("Error retrieving game: " + xhr.status);
+        console.error("Error retrieving game: " + xhr.status);
       }
     }
   };
@@ -51,7 +51,7 @@ function getAllGames() {
       } else if (xhr.status === 404) {
         console.error("Failed to GET all games");
       } else {
-        displayError("Error retrieving games: " + xhr.status);
+        console.error("Error retrieving games: " + xhr.status);
       }
     }
   };
@@ -154,7 +154,7 @@ function displayNewGameForm() {
   let addGameButton = document.createElement("input");
   addGameButton.type = "submit";
   addGameButton.name = "createGame";
-  addGameButton.value = "Submit";
+  addGameButton.value = "Create Game";
   gameForm.appendChild(addGameButton);
 
   addGameButton.addEventListener("click", function (e) {
@@ -168,8 +168,8 @@ function displayNewGameForm() {
 }
 
 function displayUpdateGameForm(game) {
-  let addGameTitle = document.getElementById("gameInformationTitle");
-  addGameTitle.textContent = "Update Game";
+	let addNewGameTitle = document.getElementById("gameInformationTitle");
+	addNewGameTitle.textContent = "Update Game";
 
   let gameFormData = document.getElementById("gameData");
   gameFormData.textContent = "";
@@ -212,7 +212,7 @@ function displayUpdateGameForm(game) {
   let updateGameButton = document.createElement("input");
   updateGameButton.type = "submit";
   updateGameButton.name = "updateGame";
-  updateGameButton.value = "Update";
+  updateGameButton.value = "Update Game";
   updateGameForm.appendChild(updateGameButton);
 
   updateGameButton.addEventListener("click", function (e) {
@@ -226,8 +226,8 @@ function displayUpdateGameForm(game) {
 }
 
 function displayGamesTable(games) {
-  let addNewGameTitle = document.getElementById("gameInformationTitle");
-  addNewGameTitle.textContent = "Game List";
+	let addNewGameTitle = document.getElementById("gameInformationTitle");
+	addNewGameTitle.textContent = "Game List";
 
   let gameData = document.getElementById("gameData");
   gameData.textContent = "";
@@ -270,6 +270,9 @@ function displayGamesTable(games) {
 }
 
 function displayGamePage(game) {
+	let addNewGameTitle = document.getElementById("gameInformationTitle");
+	addNewGameTitle.textContent = "Newly Created Game";
+
   let gameData = document.getElementById("gameData");
   gameData.textContent = "";
 
@@ -288,7 +291,7 @@ function displayGamePage(game) {
   gameData.appendChild(br);
 
   let updateButton = document.createElement("button");
-  updateButton.textContent = "UPDATE";
+  updateButton.textContent = "Update";
   gameData.appendChild(updateButton);
 
   updateButton.addEventListener("click", function (e) {
@@ -300,7 +303,7 @@ function displayGamePage(game) {
   gameData.appendChild(brUpdate);
 
   let deleteButton = document.createElement("button");
-  deleteButton.textContent = "DELETE";
+  deleteButton.textContent = "Delete";
   gameData.appendChild(deleteButton);
 
   deleteButton.addEventListener("click", function (e) {
